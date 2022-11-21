@@ -115,4 +115,3 @@ jobs:
         run: |
           chmod +x ./release.sh
           ./release.sh
-
