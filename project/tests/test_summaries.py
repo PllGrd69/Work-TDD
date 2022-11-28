@@ -151,3 +151,11 @@ def test_update_summary_invalid_keys(test_app_with_db):
             }
         ]
     }
+
+def test_create_summary_invalid_url(test_app_with_db):
+    response = test_app_with_db.post("/summaries/", data=json.dumps({"url": "invalid://url"}))
+    response_value = response.json()
+    assert response.status_code == 422
+    assert response_value['detail'][0]['msg'] == 'URL scheme not permitted'
+    #assert response_value["detail"][0]["loc"][1] == "url"
+    #assert response_value["detail"][0]["msg"] == "Insert valid url"
